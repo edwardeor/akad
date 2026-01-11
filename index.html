@@ -28,7 +28,6 @@
             background-position: center;
             font-family: 'Poppins', sans-serif;
             color: var(--text-main);
-            /* KUNCI PERBAIKAN: Overflow hidden agar tidak bisa scroll saat awal */
             overflow: hidden; 
         }
 
@@ -232,12 +231,8 @@
         const DATABASE_URL = "https://script.google.com/macros/s/AKfycbzlhRyrEBYfHEjx4caBt_ETK7CusM3W08DIavBZVO-76pfruBX-ns86DwoSzec2LyI/exec";
 
         function startInvitation() {
-            // Hilangkan overlay
             document.getElementById('overlay').style.transform = 'translateY(-100%)';
-            
-            // KUNCI PERBAIKAN: Aktifkan scroll pada body kembali
             document.body.style.overflow = 'auto'; 
-            
             document.getElementById('bgMusic').play().catch(e => console.log("Audio play deferred"));
             loadLogs();
         }
@@ -245,11 +240,17 @@
         function initGuestName() {
             const urlParams = new URLSearchParams(window.location.search);
             const guestName = urlParams.get('to');
+            const nameH1 = document.getElementById('nama-tamu-depan');
+            const nameInput = document.getElementById('name');
+
             if (guestName) {
                 const decodedName = decodeURIComponent(guestName.replace(/\+/g, ' '));
-                // Hanya isi input jika elemennya ada
-                const nameInput = document.getElementById('name');
-                if(nameInput) nameInput.value = decodedName;
+                // PERBAIKAN: Baris ini untuk merubah nama di halaman depan
+                if (nameH1) nameH1.innerText = decodedName;
+                if (nameInput) nameInput.value = decodedName;
+            } else {
+                // Jika tidak ada nama di link, kosongkan teks agar untuk umum
+                if (nameH1) nameH1.innerText = "";
             }
         }
 
@@ -295,4 +296,3 @@
     </script>
 </body>
 </html>
-

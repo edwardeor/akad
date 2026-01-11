@@ -11,10 +11,9 @@
             --glass: rgba(255, 255, 255, 0.85);
             --glass-border: rgba(255, 255, 255, 0.6);
             --text-main: #4a4a4a;
-            /* Mengubah semua aksen rose menjadi hijau */
             --green-accent: #8da290; 
             --green-dark: #6b7f6d;
-            --soft-bg: #f9fbf9; /* Putih dengan hint hijau sangat tipis */
+            --soft-bg: #f9fbf9;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -29,7 +28,8 @@
             background-position: center;
             font-family: 'Poppins', sans-serif;
             color: var(--text-main);
-            overflow-x: hidden;
+            /* KUNCI PERBAIKAN: Overflow hidden agar tidak bisa scroll saat awal */
+            overflow: hidden; 
         }
 
         .rose-decoration {
@@ -37,7 +37,7 @@
             z-index: 1001; 
             pointer-events: none; 
             width: 220px;
-            opacity: 0.8; /* Sedikit lebih transparan agar menyatu */
+            opacity: 0.8;
         }
 
         .rose-top-right { top: -45px; right: -45px; transform: rotate(0deg); }
@@ -65,12 +65,13 @@
         }
 
         .monogram {
-            font-family: 'Playfair Display', serif; font-size: 3rem; 
-            color: var(--green-accent); /* Diubah ke Hijau */
-            border: 1px solid var(--green-accent); /* Diubah ke Hijau */
-            width: 250px; height: 250px;
+            font-family: 'Playfair Display', serif; font-size: 2.5rem; 
+            color: var(--green-accent); 
+            border: 1px solid var(--green-accent); 
+            width: 200px; height: 200px;
             display: flex; align-items: center; justify-content: center;
             margin: 0 auto 30px; border-radius: 50%; font-style: italic;
+            line-height: 1.1;
         }
 
         .btn-enter {
@@ -130,7 +131,6 @@
             .start-screen { grid-template-columns: repeat(2, 1fr); }
             .rose-decoration { width: 180px; } 
             .wide-mobile { grid-column: span 2; }
-            #nama-tamu-depan { font-size: 1.8rem; }
         }
     </style>
 </head>
@@ -148,8 +148,7 @@
     <div id="overlay">
         <div class="glass-card-invitation">
             <div class="monogram">Edward <br>&<br>Sevira</div>
-			<p style="font-family: 'Montserrat', sans-serif; font-size: 0.7rem; letter-spacing: 5px; color: #bbb; text-transform: uppercase; margin-bottom: 10px;">The Wedding Invitation</p>
-            <h1 id="nama-tamu-depan" style="font-family: 'Playfair Display', serif; margin-bottom: 20px;">Tamu Undangan</h1>
+            <p style="font-family: 'Montserrat', sans-serif; font-size: 0.7rem; letter-spacing: 5px; color: #bbb; text-transform: uppercase; margin-bottom: 20px;">The Wedding Invitation</p>
             <button class="btn-enter" onclick="startInvitation()">Buka Undangan</button>
         </div>
     </div>
@@ -232,7 +231,12 @@
         const DATABASE_URL = "https://script.google.com/macros/s/AKfycbzlhRyrEBYfHEjx4caBt_ETK7CusM3W08DIavBZVO-76pfruBX-ns86DwoSzec2LyI/exec";
 
         function startInvitation() {
+            // Hilangkan overlay
             document.getElementById('overlay').style.transform = 'translateY(-100%)';
+            
+            // KUNCI PERBAIKAN: Aktifkan scroll pada body kembali
+            document.body.style.overflow = 'auto'; 
+            
             document.getElementById('bgMusic').play().catch(e => console.log("Audio play deferred"));
             loadLogs();
         }
@@ -242,8 +246,9 @@
             const guestName = urlParams.get('to');
             if (guestName) {
                 const decodedName = decodeURIComponent(guestName.replace(/\+/g, ' '));
-                document.getElementById('nama-tamu-depan').innerText = decodedName;
-                document.getElementById('name').value = decodedName;
+                // Hanya isi input jika elemennya ada
+                const nameInput = document.getElementById('name');
+                if(nameInput) nameInput.value = decodedName;
             }
         }
 

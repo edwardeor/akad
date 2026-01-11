@@ -11,16 +11,16 @@
             --glass: rgba(255, 255, 255, 0.85);
             --glass-border: rgba(255, 255, 255, 0.6);
             --text-main: #4a4a4a;
-            --rose-accent: #d4a5a9; 
-            --rose-dark: #b88d92;
+            /* Mengubah semua aksen rose menjadi hijau */
             --green-accent: #8da290; 
             --green-dark: #6b7f6d;
+            --soft-bg: #f9fbf9; /* Putih dengan hint hijau sangat tipis */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
-            background: #fffafa;
+            background: var(--soft-bg);
             background-image: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), 
                               url('assets/bg.png'); 
             background-attachment: fixed;
@@ -37,7 +37,7 @@
             z-index: 1001; 
             pointer-events: none; 
             width: 220px;
-            opacity: 0.9;
+            opacity: 0.8; /* Sedikit lebih transparan agar menyatu */
         }
 
         .rose-top-right { top: -45px; right: -45px; transform: rotate(0deg); }
@@ -65,8 +65,10 @@
         }
 
         .monogram {
-            font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--rose-accent);
-            border: 1px solid var(--rose-accent); width: 100px; height: 100px;
+            font-family: 'Playfair Display', serif; font-size: 3rem; 
+            color: var(--green-accent); /* Diubah ke Hijau */
+            border: 1px solid var(--green-accent); /* Diubah ke Hijau */
+            width: 100px; height: 100px;
             display: flex; align-items: center; justify-content: center;
             margin: 0 auto 30px; border-radius: 50%; font-style: italic;
         }
@@ -103,7 +105,6 @@
 
         .val { font-family: 'Playfair Display', serif; font-size: 2.1rem; color: #2d2d2d; line-height: 1.2; }
         
-        /* Gaya Nama Orang Tua */
         .parent-info {
             font-family: 'Poppins', sans-serif;
             font-size: 0.85rem;
@@ -121,12 +122,13 @@
 
         .acc-box { background: #fff; padding: 12px; margin: 8px 0; display: flex; justify-content: space-between; align-items: center; border: 1px solid #f0f0f0; }
         .btn-copy { background: var(--green-accent); color: white; border: none; padding: 8px 15px; cursor: pointer; text-transform: uppercase; font-size: 0.7rem; font-weight: 600; }
+        .btn-copy:hover { background: var(--green-dark); }
         
         @keyframes floating { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-15px); } }
 
         @media (max-width: 600px) {
             .start-screen { grid-template-columns: repeat(2, 1fr); }
-			.rose-decoration { width: 180px; } 
+            .rose-decoration { width: 180px; } 
             .wide-mobile { grid-column: span 2; }
             #nama-tamu-depan { font-size: 1.8rem; }
         }
@@ -163,7 +165,7 @@
             <p style="font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.1rem; line-height: 1.7; color: #555;">
                 "Di antara tanda-tanda (kebesaran)-Nya ialah bahwa Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri agar kamu merasa tenteram kepadanya. Dia menjadikan di antaramu rasa cinta dan kasih sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah) bagi kaum yang berpikir."
             </p>
-            <p style="font-size: 0.65rem; margin-top: 15px; font-weight: 600; color: #ccc; letter-spacing: 1px;">QS. AR-RUM: 21</p>
+            <h2>QS. AR-RUM: 21</h2>
         </div>
 
         <div class="tile large">
@@ -172,13 +174,13 @@
             <div class="val">Edward Osmar Risqi</div>
             <p class="parent-info">Putra dari Bapak Dwi Kuswanto & Ibu Yuny Isnaenie</p>
             
-            <div style="font-family: 'Playfair Display', serif; font-size: 1.2rem; font-style: italic; color: var(--rose-accent); margin: 5px 0;">dan</div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 1.2rem; font-style: italic; color: var(--green-accent); margin: 5px 0;">dan</div>
             
             <div class="val">Sevira Insani Amalia</div>
             <p class="parent-info">Putri dari Bapak Estu Karyawanto & Ibu Laminingsih</p>
         </div>
 
-        <a href="https://maps.app.goo.gl/A3xn9mfeN5F44NeS6" target="_blank" class="tile wide wide-mobile" style="text-decoration: none; color: inherit;">
+        <a href="https://maps.app.goo.gl/..." target="_blank" class="tile wide wide-mobile" style="text-decoration: none; color: inherit;">
             <h2>Waktu & Lokasi</h2>
             <div class="event-info-container">
                 <div class="event-info-item">

@@ -75,11 +75,11 @@
 
         .monogram {
             font-family: 'Playfair Display', serif;
-            font-size: 2rem;
+            font-size: 3rem;
             color: var(--green-accent);
             border: 1px solid var(--green-accent);
-            width: 180px;
-            height: 180px;
+            width: 250px;
+            height: 250px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -164,6 +164,30 @@
             height: 1px;
             background: linear-gradient(to right, transparent, #ddd, transparent);
             margin: 20px auto;
+        }
+
+        /* --- NO REKENING --- */
+        .acc-box { 
+            background: #fff; 
+            padding: 12px; 
+            margin: 8px 0; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border: 1px solid #f0f0f0; 
+            border-radius: 4px;
+        }
+
+        .btn-copy { 
+            background: var(--green-accent); 
+            color: white; 
+            border: none; 
+            padding: 8px 15px; 
+            cursor: pointer; 
+            text-transform: uppercase; 
+            font-size: 0.7rem; 
+            font-weight: 600; 
+            border-radius: 4px;
         }
 
         /* --- FORM RSVP --- */
@@ -280,27 +304,41 @@
         <div class="tile">
             <h2>Mempelai</h2>
             <div class="val">Edward Osmar Risqi</div>
-            <p class="parent-info">Putra dari Bapak Dwi Kuswanto & Ibu Yuny Isnaenie</p>
+            <p class="parent-info">Putra dari Bapak Dwi Kuswanto (Alm) & Ibu Yuny Isnaenie</p>
             <div style="font-family: 'Playfair Display', serif; font-size: 1.2rem; font-style: italic; color: var(--green-accent); margin: 5px 0;">dan</div>
             <div class="val">Sevira Insani Amalia</div>
             <p class="parent-info">Putri dari Bapak Estu Karyawanto & Ibu Laminingsih</p>
         </div>
 
         <a href="https://maps.app.goo.gl/A3xn9mfeN5F44NeS6" target="_blank" class="tile" style="text-decoration: none; color: inherit;">
-            <h2>Waktu & Lokasi</h2>
+            <h2>Akad Nikah</h2>
             <div>
-                <p style="font-size: 0.8rem; color: var(--green-accent); font-weight: 700;">AKAD NIKAH</p>
-                <p style="font-size: 1.2rem; color: #222; font-weight: 600;">Jumat, 6 Februari 2026</p>
+                <p style="font-size: 0.8rem; color: var(--green-accent); font-weight: 700;">JUMAT, 6 FEBRUARI 2026</p>
                 <p style="font-size: 1.0rem; color: #888;">Pukul 08:00 - 10:00 WIB</p>
             </div>
             <div class="divider-horizontal"></div>
             <div>
                 <p style="font-size: 0.8rem; color: var(--green-accent); font-weight: 700;">ALAMAT</p>
                 <p style="font-size: 1.2rem; color: #222; font-weight: 600;">Rumah Mempelai Wanita</p>
-                <p style="font-size: 0.9rem; color: #888;">Jl. KH. Wahid Hasyim Gg. Semboja No. 5 Batang</p>
+                <p style="font-size: 0.9rem; color: #888;">Jl. KH. Wahid Hasyim Gg. Semboja No. 5 Kauman Batang</p>
             </div>
             <p style="color: var(--green-accent); font-weight: bold; font-size: 0.7rem; margin-top: 25px;">LIHAT ARAH LOKASI →</p>
         </a>
+
+        <div class="tile">
+            <h2>Digital Gift</h2>
+            <p style="font-size: 0.85rem; margin-bottom: 5px;">Bank BCA - Edward Osmar Risqi</p>
+            <div class="acc-box">
+                <span id="acc-edward" style="font-family: monospace; font-size: 1rem;">5520597150</span>
+                <button class="btn-copy" onclick="copyAcc('acc-edward')">SALIN</button>
+            </div>
+            <div class="divider-horizontal" style="width: 30%;"></div>
+            <p style="font-size: 0.85rem; margin-bottom: 5px;">Bank BRI - Sevira Insani Amalia</p>
+            <div class="acc-box">
+                <span id="acc-sevira" style="font-family: monospace; font-size: 1rem;">015601040302504</span>
+                <button class="btn-copy" onclick="copyAcc('acc-sevira')">SALIN</button>
+            </div>
+        </div>
 
         <div class="tile">
             <h2>Konfirmasi & Doa Restu</h2>
@@ -353,7 +391,6 @@
                 }
             } catch (e) {
                 container.innerHTML = "Gagal memuat ucapan.";
-                console.error("Gagal load data:", e);
             }
         }
 
@@ -389,6 +426,13 @@
             }
         }
 
+        function copyAcc(elementId) {
+            const accNo = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(accNo).then(() => {
+                alert("Nomor rekening berhasil disalin!");
+            });
+        }
+
         window.onload = function() {
             const urlParams = new URLSearchParams(window.location.search);
             const guestName = urlParams.get('to');
@@ -402,4 +446,3 @@
 </body>
 
 </html>
-
